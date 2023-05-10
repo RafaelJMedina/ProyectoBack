@@ -1,0 +1,90 @@
+[
+    {
+    "id": 1,
+    "title": "Amd Ryzen 5",
+    "description": "Procesador gamer AMD Ryzen 5 5600X",
+    "code": "R5",
+    "price": 200000,
+    "status": true,
+    "stock": 15,
+    "category": "Tecnologia",
+    "thumbnails": []
+},
+{
+    "id": 3,
+    "title": "Amd Ryzen 9",
+    "description": "Procesador gamer AMD Ryzen 9 5950X",
+    "code": "R9",
+    "price": 460000,
+    "status": true,
+    "stock": 10,
+    "category": "Tecnologia",
+    "thumbnail": []
+},
+{
+    "id": 4,
+    "title": "RAM 8GB",
+    "description": "Memoria RAM Fury Beast DDR4 gamer color negro 8GB 1 Kingston KF432C16BB/8",
+    "code": "RFD4",
+    "price": 12999,
+    "status": true,
+    "stock": 100,
+    "category": "Tecnologia",
+    "thumbnail": []
+},
+{
+    "id": 5,
+    "title": "MotherBoard Gigabyte",
+    "description": "Motherboard Gigabyte B550m Ds3h Am4 Amd Ryzen - Acuario",
+    "code": "MBG",
+    "price": 67000,
+    "status": true,
+    "stock": 200,
+    "category": "Tecnologia",
+    "thumbnail": []
+},
+{
+    "id": 6,
+    "title": "Kit de teclado y mouse gamer",
+    "description": "Redragon K551RGB-BA Español Latinoamérica de color negro",
+    "code": "TYMR",
+    "price": 31200,
+    "status": true,
+    "stock": 30,
+    "category": "Perifericos",
+    "thumbnail": []
+},
+{
+    "id": 7,
+    "title": "Mouse gamer",
+    "description": "Redragon Centrophorus2 M601-RGB black",
+    "code": "MGR",
+    "price": 6500,
+    "status": true,
+    "stock": 200,
+    "category": "Perifericos",
+    "thumbnails": []
+},
+{
+    "id": 8,
+    "title": "Teclado Mecanizado",
+    "description": "Teclado Gamer Mecanizado Constrictor By Aiwa Qwerty Metal",
+    "code": "TGM",
+    "price": 7999,
+    "status": true,
+    "stock": 50,
+    "category": "Perifericos",
+    "thumbnails": []
+},
+{
+    "id": 9,
+    "title": "Mouse Pad",
+    "description": "Mouse Pad gamer HP MP9040 de goma l 400mm x 900mm x 3mm negro",
+    "code": "MPG",
+    "price": 4500,
+    "status": true,
+    "stock": 120,
+    "category": "Perifericos",
+    "thumbnails": []
+}
+]
