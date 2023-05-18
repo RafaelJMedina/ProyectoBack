@@ -1,4 +1,4 @@
-import productModel from './db/models/productModel.js'
+import productModel from '../models/productModel.js'
 
 class ProductManagerMongo{
 
@@ -8,13 +8,13 @@ class ProductManagerMongo{
         const product = {
             title: _product.title,
             description: _product.description,
-            quantity: _product.quantity
-            /* code: _product.code,
+            quantity: _product.quantity,
+            code: _product.code,
             price: _product.price,
             status: true,
             stock: _product.stock,
             cateogry: _product.category,
-            thumbnails: _product.thumbnails, */
+            thumbnails: _product.thumbnails,
         };
 
       

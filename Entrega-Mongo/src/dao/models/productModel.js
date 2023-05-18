@@ -5,7 +5,11 @@ const productCollection = "products";
 const productSchema = mongoose.Schema({
     title: String,
     description: String,
-    quantity: Number
+    quantity: Number,
+    code: String,
+    price: Number,
+    stock: Number,
+    category: String
 })
 
 const productModel = mongoose.model(productCollection, productSchema);

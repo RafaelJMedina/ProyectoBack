@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import __dirname from '../utils.js';
-import ProductManager from '../productmanager.js';
-import ProductManagerMongo from '../ProductManagerMongo.js';
+import ProductManager from '../dao/fs/ProductManager.js';
+import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
 const PATH = __dirname + '/db/products.json';
 
 const router = Router();

@@ -2,7 +2,7 @@ import { Router } from 'express';
 import __dirname from '../utils.js';
 //import ProductManager from '../productmanager.js';
 //import CartManager from '../cartmanager.js';
-import CartManagerMongo from '../cartmanagerMongo.js';
+import CartManagerMongo from '../dao/mongo/cartmanagerMongo.js';
 
 //const CARTS_PATH = __dirname + '/db/carts.json';
 //const PRODUCTS_PATH = __dirname + '/db/products.json';
