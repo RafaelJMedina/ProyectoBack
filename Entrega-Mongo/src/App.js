@@ -7,12 +7,19 @@ import cartRouter from './routes/carts.router.js';
 import __dirname from './utils.js';
 
 
-
-const DB = 'eshop';
-const MONGO ='mongodb+srv://rafaeljmedina:<password>@cluster0.rwmqinj.mongodb.net/' + DB; 
 const PORT = 8080;
-
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
+app.use('/api/products', productRouter);
+app.use('/api/carts', cartRouter);
+
+app.listen(PORT, ()=>{ console.log(`El servidor está corriendo en el puerto ${PORT}`); });
+
+const MONGO ='mongodb+srv://rafaeljesusmedina:PmlBAvVYhhTH5y74@cluster0.3zxlt6w.mongodb.net/?retryWrites=true&w=majority'; 
+
 
 mongoose.connect(MONGO)
 
@@ -36,10 +43,4 @@ app.get('/test', (req,res)=>{
 })
 
 
-app.use(express.json());
-app.use(express.urlencoded({extended: true}));
 
-app.listen(PORT, ()=>{ console.log(`El servidor está corriendo en el puerto ${PORT}`); });
-
-app.use('/api/products', productRouter);
-app.use('/api/carts', cartRouter);

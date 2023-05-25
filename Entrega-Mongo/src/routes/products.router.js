@@ -1,19 +1,21 @@
 import { Router } from 'express';
 import __dirname from '../utils.js';
+import ManagerAcces from '../dao/managers/ManagerAccess.js';
 import ProductManager from '../dao/fs/ProductManager.js';
 import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
 const PATH = __dirname + '/db/products.json';
 
 const router = Router();
 
+const managerAcces = new ManagerAcces();
 const productManager = new ProductManager(PATH);
 const productManagerMongo = new ProductManagerMongo();
 
-router.get('/', async (request, response)=>{
-    
+router.get('/', async (req, res)=>{
+    await managerAcces.crearRegistro('GET');
     const respuesta = await productManagerMongo.getProducts();
 
-    response.status(respuesta.code).send({
+    res.status(respuesta.code).send({
         status: respuesta.status,
         message: respuesta.message
     });
@@ -21,6 +23,7 @@ router.get('/', async (request, response)=>{
 
 //Busca producto por ID interno
 router.get('/:pid', async (request, response)=>{
+    await managerAcces.crearRegistro('GET');
     const pid = parseInt(request.params.pid);
 
     const respuesta = await productManager.getProductByID(pid);
@@ -32,6 +35,7 @@ router.get('/:pid', async (request, response)=>{
 });
 
 router.post('/', async (request, response)=>{
+    await managerAcces.crearRegistro('POST');
     const product = request.body;
 
     const respuesta = await productManagerMongo.addProduct(product);
@@ -43,6 +47,7 @@ router.post('/', async (request, response)=>{
 });
 
 router.put('/:pid', async (request, response)=>{
+    await managerAcces.crearRegistro('PUT');
     const pid = parseInt(request.params.pid);
     
     const product = request.body;
@@ -56,6 +61,7 @@ router.put('/:pid', async (request, response)=>{
 });
 
 router.delete('/:pid', async (request, response)=>{
+    await managerAcces.crearRegistro('DELETE');
     const pid = parseInt(request.params.pid);
 
     const respuesta = await productManager.deleteProduct(pid);

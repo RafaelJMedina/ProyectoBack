@@ -1,22 +1,17 @@
 import { Router } from 'express';
 import __dirname from '../utils.js';
-//import ProductManager from '../productmanager.js';
-//import CartManager from '../cartmanager.js';
 import CartManagerMongo from '../dao/mongo/cartmanagerMongo.js';
+import ManagerAcces from '../dao/managers/ManagerAccess.js';
 
-//const CARTS_PATH = __dirname + '/db/carts.json';
-//const PRODUCTS_PATH = __dirname + '/db/products.json';
 
 const router = Router();
 
-//const cartManager = new CartManager(CARTS_PATH);
+const managerAcces = new ManagerAcces();
 const cartManagerMongo = new CartManagerMongo();
-//const productManager = new ProductManager(PRODUCTS_PATH);
-//const products = await productManager.getProducts();
-
 
 
 router.post('/', async(request, response) => {
+    await managerAcces.crearRegistro('POST');
     const respuesta = await cartManagerMongo.createCart();
     response.status(respuesta.code).send({
         status: respuesta.status,
@@ -25,6 +20,7 @@ router.post('/', async(request, response) => {
 });
 
 router.post('/:cid/product/:pid', async (request, response) => {
+    await managerAcces.crearRegistro('POST');
     const cid = request.params.cid;
 
     const pid = request.params.pid;
@@ -38,7 +34,7 @@ router.post('/:cid/product/:pid', async (request, response) => {
 });
 
 router.get('/', async(request, response) => {
-
+    await managerAcces.crearRegistro('GET');
     const respuesta = await cartManagerMongo.getCarts();
 
     response.status(respuesta.code).send({
@@ -47,6 +43,7 @@ router.get('/', async(request, response) => {
     });
 })
 router.get('/:cid', async(request, response) => {
+    await managerAcces.crearRegistro('GET');
     const cid = (request.params.cid);
 
     const respuesta = await cartManagerMongo.getCart(cid);
