@@ -2,6 +2,7 @@ import express from 'express';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import mongoose from 'mongoose';
+
 import productRouter from './routes/products.router.js';
 import cartRouter from './routes/carts.router.js';
 import __dirname from './utils.js';
@@ -19,9 +20,7 @@ app.use('/api/carts', cartRouter);
 app.listen(PORT, ()=>{ console.log(`El servidor está corriendo en el puerto ${PORT}`); });
 
 const MONGO ='mongodb+srv://rafaeljesusmedina:PmlBAvVYhhTH5y74@cluster0.3zxlt6w.mongodb.net/?retryWrites=true&w=majority'; 
-
-
-mongoose.connect(MONGO)
+const connection = mongoose.connect(MONGO);
 
 app.use(session({
     store: new MongoStore({

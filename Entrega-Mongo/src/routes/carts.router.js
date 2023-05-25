@@ -10,8 +10,8 @@ const managerAcces = new ManagerAcces();
 const cartManagerMongo = new CartManagerMongo();
 
 
-router.post('/', async(request, response) => {
-    await managerAcces.crearRegistro('POST');
+router.post('/', async(req, res) => {
+    await managerAcces.crearRegistro('Alta carrito');
     const respuesta = await cartManagerMongo.createCart();
     response.status(respuesta.code).send({
         status: respuesta.status,

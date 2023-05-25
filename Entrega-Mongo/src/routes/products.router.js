@@ -3,73 +3,71 @@ import __dirname from '../utils.js';
 import ManagerAcces from '../dao/managers/ManagerAccess.js';
 import ProductManager from '../dao/fs/ProductManager.js';
 import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
-const PATH = __dirname + '/db/products.json';
+import productModel  from '../dao/models/productModel.js';
 
+const PATH = __dirname + '/db/products.json';
 const router = Router();
 
 const managerAcces = new ManagerAcces();
 const productManager = new ProductManager(PATH);
 const productManagerMongo = new ProductManagerMongo();
 
+//Busca todo los productos
 router.get('/', async (req, res)=>{
-    await managerAcces.crearRegistro('GET');
-    const respuesta = await productManagerMongo.getProducts();
-
-    res.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+    await managerAcces.crearRegistro('Consulta todo los productos');
+    const result = await productModel.find();
+    res.send({result})
 });
 
 //Busca producto por ID interno
-router.get('/:pid', async (request, response)=>{
-    await managerAcces.crearRegistro('GET');
-    const pid = parseInt(request.params.pid);
-
-    const respuesta = await productManager.getProductByID(pid);
-
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+router.get('/:pid', async (req, res)=>{
+    await managerAcces.crearRegistro('Consutla el producto buscado');
+      
+    const pid = req.params.pid;
+    const result = await productModel.find({_id:pid})
+    res.send({result})
 });
 
-router.post('/', async (request, response)=>{
-    await managerAcces.crearRegistro('POST');
-    const product = request.body;
+//Crea un producto
+router.post('/', async (req, res)=>{
+    await managerAcces.crearRegistro('Alta producto');
+    const {title, description, quantity, code, price, stock, category} = req.body;
 
-    const respuesta = await productManagerMongo.addProduct(product);
+    if(!title || !description || !quantity || !code || !price || !stock || !category) {
+        return res.status(400).send({
+            error: 'Datos incompletos'
+        })
+    }
 
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+    const product = {
+        title, description, quantity, code, price, stock, category
+    }
+
+    const result = await productModel.create(product)
+
+
+    res.send({result})
 });
 
-router.put('/:pid', async (request, response)=>{
-    await managerAcces.crearRegistro('PUT');
-    const pid = parseInt(request.params.pid);
-    
-    const product = request.body;
+//Actualiza un producto
+router.put('/:pid', async (req, res)=>{
+    await managerAcces.crearRegistro('Actualizo un producto');
 
-    const respuesta = await productManager.updateProduct(pid, product);
+    const pid = req.params.pid
+    const newProduct = req.body;
 
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+    const result = await productModel.updateOne({_id:pid},{$set:newProduct})
+
+    res.send({result})
 });
 
-router.delete('/:pid', async (request, response)=>{
-    await managerAcces.crearRegistro('DELETE');
-    const pid = parseInt(request.params.pid);
+//Elimina el producto
+router.delete('/:pid', async (req, res)=>{
+    await managerAcces.crearRegistro('Elimina un producto');
+    const pid = req.params.pid;
 
-    const respuesta = await productManager.deleteProduct(pid);
-
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+    const result = await productModel.deleteOne({_id:pid})
+    res.send({result})
 });
-
+ 
 export default router;
