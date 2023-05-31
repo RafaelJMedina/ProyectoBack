@@ -2,7 +2,6 @@ import express from 'express';
 import session from 'express-session';
 import MongoStore from 'connect-mongo';
 import mongoose from 'mongoose';
-
 import productRouter from './routes/products.router.js';
 import cartRouter from './routes/carts.router.js';
 import __dirname from './utils.js';

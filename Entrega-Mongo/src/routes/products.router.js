@@ -1,16 +1,13 @@
 import { Router } from 'express';
 import __dirname from '../utils.js';
 import ManagerAcces from '../dao/managers/ManagerAccess.js';
-import ProductManager from '../dao/fs/ProductManager.js';
-import ProductManagerMongo from '../dao/mongo/ProductManagerMongo.js';
 import productModel  from '../dao/models/productModel.js';
 
 const PATH = __dirname + '/db/products.json';
 const router = Router();
 
 const managerAcces = new ManagerAcces();
-const productManager = new ProductManager(PATH);
-const productManagerMongo = new ProductManagerMongo();
+
 
 //Busca todo los productos
 router.get('/', async (req, res)=>{

@@ -31,7 +31,12 @@ const productSchema = new mongoose.Schema({
     category:{
         type:String,
         require:true
+    },
+    cart:{
+        type:Array,
+        default:[]
     }
+
 })
 
 const productModel = mongoose.model(productCollection, productSchema);

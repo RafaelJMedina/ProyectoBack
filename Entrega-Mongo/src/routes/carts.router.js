@@ -1,21 +1,21 @@
 import { Router } from 'express';
 import __dirname from '../utils.js';
-import CartManagerMongo from '../dao/mongo/cartmanagerMongo.js';
 import ManagerAcces from '../dao/managers/ManagerAccess.js';
+import cartModel from '../dao/models/cartModel.js';
 
 
 const router = Router();
 
 const managerAcces = new ManagerAcces();
-const cartManagerMongo = new CartManagerMongo();
 
 
 router.post('/', async(req, res) => {
     await managerAcces.crearRegistro('Alta carrito');
-    const respuesta = await cartManagerMongo.createCart();
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
+    const cart = req.body
+    const result = await cartModel.create();
+    res.status(res.code).send({
+        status: res.status,
+        message: res.message
     });
 });
 

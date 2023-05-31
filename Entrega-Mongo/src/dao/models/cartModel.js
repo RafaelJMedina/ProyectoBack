@@ -5,10 +5,20 @@ const cartCollection = "carts";
 
 const cartSchema = mongoose.Schema({
     products:{
-        type: Array,
-        default: []
+        type:[{
+            product:{
+                type: mongoose.Schema.Types.ObjectId,
+                ref:'products'
+            }
+        }],
+        default: []  
     }
 })
+
+cartSchema.pre('find', function(){
+    this.populete(products.product);
+}
+)
 
 const cartModel = mongoose.model(cartCollection, cartSchema);
 
