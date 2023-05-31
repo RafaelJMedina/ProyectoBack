@@ -1,40 +1,14 @@
-import fs from 'fs';
+import productModel from '../models/productModel.js'
 
-class ProductManager{
-
-    constructor(path){
-        this.path = path;
-    }
+class ProductManagerMongo{
 
     async addProduct(_product){
-        const products = await this.readJSON();
-
-        if (!this.validateProduct(_product)){
-            return {
-                code: 400,
-                status: 'Error',
-                message: 'Faltan uno o más campos. Por favor, verifique que el objeto a insertar tenga todos los campos obligatorios, etc.'
-            };
-        };
-
-        const codeFound = products.find(product => product.code === _product.code);
-
-        if (codeFound){
-            return {
-                code: 403,
-                status: 'Error',
-                message: `No se pudo agregar el nuevo producto porque el código ${_product.code} ya está en uso`
-            };
-        };
-
-        if (!_product.thumbnails){
-            _product.thumbnails = [];
-        };
+       // const products = await this.readJSON();
         
         const product = {
-            id: await this.getNextID(),
             title: _product.title,
             description: _product.description,
+            quantity: _product.quantity,
             code: _product.code,
             price: _product.price,
             status: true,
@@ -43,17 +17,16 @@ class ProductManager{
             thumbnails: _product.thumbnails,
         };
 
-        products.push(product);
+      
 
         try {
-            return await fs.promises.writeFile(this.path, JSON.stringify(products))
-            .then(() => {
+
+            const result = await productModel.create(product)
                 return {
                     code: 202,
                     status: 'Success',
                     message: `El producto ${product.title} ha sido agregado con éxito. Su ID interno es ${product.id}`
                 };
-            });
         } catch (error) {
             return {
                 code: 400,
@@ -79,29 +52,14 @@ class ProductManager{
         return Math.max(...productIDS) + 1;
     }
 
-    async getProducts(limit){
-        const products = await this.readJSON();
+    async getProducts(){
+        const products = await productModel.find();
             
-        if (!limit){
-            return {
-                code: 202,
-                status: 'Success',
-                message: products
-            };
-        };
-
-        if (limit < 0){
-            return {
-                code: 400,
-                status: 'Error',
-                message: 'El límite de items es un número negativo'
-            };
-        };
-        
+       
         return {
             code: 202,
             status: 'Success',
-            message: products.filter((element, idx)=>idx<limit)
+            message: products
         };
     };
 
@@ -238,4 +196,4 @@ class ProductManager{
     };
 }
 
-export default ProductManager;
+export default ProductManagerMongo;
