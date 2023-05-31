@@ -13,46 +13,41 @@ router.post('/', async(req, res) => {
     await managerAcces.crearRegistro('Alta carrito');
     const cart = req.body
     const result = await cartModel.create();
-    res.status(res.code).send({
-        status: res.status,
-        message: res.message
-    });
+    res.send({result})
 });
 
-router.post('/:cid/product/:pid', async (request, response) => {
+router.post('/:cid/product/:pid', async (req, res) => {
     await managerAcces.crearRegistro('POST');
-    const cid = request.params.cid;
+    const cid = req.params.cid;
 
-    const pid = request.params.pid;
+    const pid = req.params.pid;
 
-    const respuesta = await cartManagerMongo.updateCart(cid, pid);
+    const respuesta = await cartModel.updateMany({_id:cid},{_id:pid});
 
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+    res.send({respuesta})
 });
 
-router.get('/', async(request, response) => {
+router.get('/', async(req, res) => {
     await managerAcces.crearRegistro('GET');
-    const respuesta = await cartManagerMongo.getCarts();
+    const respuesta = await cartModel.find();
 
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+    res.send({respuesta})
 })
-router.get('/:cid', async(request, response) => {
+
+router.get('/:cid', async(req, res) => {
     await managerAcces.crearRegistro('GET');
-    const cid = (request.params.cid);
+    const cid = (req.params.cid);
 
-    const respuesta = await cartManagerMongo.getCart(cid);
-
-    response.status(respuesta.code).send({
-        status: respuesta.status,
-        message: respuesta.message
-    });
+    const respuesta = await cartModel.findById({_id:cid});
+    res.send({respuesta})
 });
 
+router.delete('/:pid', async (req, res)=>{
+    await managerAcces.crearRegistro('Elimina un producto');
+    const pid = req.params.pid;
+
+    const result = await cartModel.deleteOne({_id:pid})
+    res.send({result})
+});
 
 export default router;
