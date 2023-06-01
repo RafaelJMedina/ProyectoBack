@@ -1,0 +1,4 @@
+Fecha: function toLocaleDateString() { [native code] } - Hora: function toLocaleTimeString() { [native code] } - Metodo: Consulta todo los productos
+Fecha: function toLocaleDateString() { [native code] } - Hora: function toLocaleTimeString() { [native code] } - Metodo: GET
+Fecha: function toLocaleDateString() { [native code] } - Hora: function toLocaleTimeString() { [native code] } - Metodo: Consulta todo los productos
+Fecha: function toLocaleDateString() { [native code] } - Hora: function toLocaleTimeString() { [native code] } - Metodo: GET

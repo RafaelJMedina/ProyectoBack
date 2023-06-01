@@ -1,0 +1,20 @@
+<div>
+    <h1>Bienvenido {{ nombreUsuario}} - {{ role}} </h1>
+    {{#each products}}
+    <li>
+        <strong>Title: </strong> {{this.title}}
+        <strong>Description: </strong> {{this.description}}
+        <strong>Price: </strong> {{this.price}}
+        <strong>Stock: </strong> {{this.stock}}
+        <strong>Status: </strong> {{this.status}}
+        <strong>Category: </strong> {{this.category}}
+        <strong>Code: </strong> {{this.code}}
+    </li>
+    {{/each}}
+    {{#if hasPrevPage}}
+    <a href="/api/products?page={{prevPage}}"><button>Anterior</button></a>
+    {{if}}
+     {{#if hasNextPage}}
+     <a href="/api/products?page={{nextPage}}"><button>Siguiente</button></a>     
+    {{if}}
+</div>
