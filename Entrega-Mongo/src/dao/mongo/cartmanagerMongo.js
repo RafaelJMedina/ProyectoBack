@@ -64,6 +64,29 @@ class CartManagerMongo{
         };
 
     };
+
+//Eliminamos del carrito
+async deleteProductCart(cid, pid){
+
+    const cart = await cartModel.findOne({_id:cid})
+    const prodIndex = cart.products.findIndex(cprod => cprod._id === cid);
+   
+    if (prodIndex === -1){
+    } 
+    else {
+        
+        cart.products.splice(prodIndex)
+    }
+
+    const result = await cartModel.updateOne({_id:cid},{$set:cart})
+    
+    return {
+        code: 202,
+        status: 'Success',
+        message: cart.products
+    };
+
+};
 //Buscar carritos
     async getCarts(){
         

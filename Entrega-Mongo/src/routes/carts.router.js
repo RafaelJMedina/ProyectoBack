@@ -36,6 +36,20 @@ router.post('/:cid/product/:pid', async (req, res) => {
     });
 });
 
+router.delete('/:cid/product/:pid', async (req, res) => {
+
+    await managerAcces.crearRegistro('POST');
+
+    const cid = req.params.cid;
+    const pid = req.params.pid;
+
+    const respuesta = await cartManagerMongo.deleteProductCart(cid, pid);
+    res.status(respuesta.code).send({
+        status: respuesta.status,
+        message: respuesta.message
+    });
+});
+
 router.get('/', async(req, res) => {
     await managerAcces.crearRegistro('GET');
 
