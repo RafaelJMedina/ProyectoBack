@@ -21,10 +21,8 @@ app.use(express.urlencoded({extended: true}));
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use('/', viewRouter);
-app.use(express.static(__dirname+ '/public'));
 
 app.engine('handlebars', handlebars.engine());
-
 app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
@@ -44,12 +42,12 @@ store: new MongoStore({
 }))
 
 app.get('/',(req,res)=>{
-    res.render('products');
+    res.render('login');
 })
 
-app.post('/products', (req, res)=>{
+app.post('/login', (req, res)=>{
     const data = req.body;
-    res.product
+    res.login('Coderlogin', data,{maxAge:10000}).send({status:'success', message:'login set'})
 })
 
 

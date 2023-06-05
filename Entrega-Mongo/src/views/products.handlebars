@@ -1,14 +1,14 @@
 <div>
-    <h1>Bienvenido {{ nombreUsuario}} - {{ role}} </h1>
+    <h1>Bienvenido</h1>
     {{#each products}}
     <li>
-        <strong>Title: </strong> {{this.title}}
-        <strong>Description: </strong> {{this.description}}
-        <strong>Price: </strong> {{this.price}}
-        <strong>Stock: </strong> {{this.stock}}
-        <strong>Status: </strong> {{this.status}}
-        <strong>Category: </strong> {{this.category}}
-        <strong>Code: </strong> {{this.code}}
+        <p> Title: {{this.title}}</p>
+        <p>Description:  {{this.description}}</p>
+        <p>Price: {{this.price}}   </p>
+        <p>Stock:  {{this.stock}}</p>
+        <p>Status: {{this.status}} </p>
+        <p>Category:  {{this.category}}</p>
+        <p>Code:  {{this.code}}</p>
     </li>
     {{/each}}
     {{#if hasPrevPage}}
