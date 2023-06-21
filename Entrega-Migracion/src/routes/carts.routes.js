@@ -12,6 +12,7 @@ const router = Router();
 
 //agregar carrito
 router.post("/",async(req,res)=>{
+    await managerAcces.crearRegistro('Alta carrito');
     try {
         const cartAdded = await cartManager.addCart();
         res.json({status:"success", result:cartAdded, message:"cart added"});
@@ -22,6 +23,7 @@ router.post("/",async(req,res)=>{
 
 //ruta para listar todos los productos de un carrito
 router.get("/:cid",async(req,res)=>{
+    await managerAcces.crearRegistro('GET');
     try {
         const cartId = req.params.cid;
         //obtenemos el carrito
@@ -34,6 +36,7 @@ router.get("/:cid",async(req,res)=>{
 
 //ruta para agregar un producto al carrito
 router.post("/:cid/product/:pid",async(req,res)=>{
+    await managerAcces.crearRegistro('POST');
     try {
         const cartId = req.params.cid;
         const productId = req.params.pid;
@@ -50,6 +53,7 @@ router.post("/:cid/product/:pid",async(req,res)=>{
 
 //ruta para eliminar un producto del carrito
 router.delete("/:cid/product/:pid",async(req,res)=>{
+    await managerAcces.crearRegistro('DELETE');
     try {
         const cartId = req.params.cid;
         const productId = req.params.pid;
@@ -66,6 +70,7 @@ router.delete("/:cid/product/:pid",async(req,res)=>{
 
 //ruta para actualizar todos los productos de un carrito.
 router.put("/:cid",async(req,res)=>{
+    await managerAcces.crearRegistro('PUT');
     try {
         const cartId = req.params.cid;
         const products = req.body.products;
@@ -81,6 +86,7 @@ router.put("/:cid",async(req,res)=>{
 
 //ruta para actualizar cantidad de un producto en el carrito
 router.put("/:cid",async(req,res)=>{
+    await managerAcces.crearRegistro('PUT');
     try {
         const cartId = req.params.cid;
         const products = req.body.products;
@@ -95,6 +101,7 @@ router.put("/:cid",async(req,res)=>{
 
 //ruta para actualizar la cantidad de un producto en el carrito
 router.put("/:cid/product/:pid",async(req,res)=>{
+    await managerAcces.crearRegistro('PUT');
     try {
         const cartId = req.params.cid;
         const productId = req.params.pid;
@@ -110,6 +117,7 @@ router.put("/:cid/product/:pid",async(req,res)=>{
 
 //ruta para eliminar todos los productos del carrito
 router.delete("/:cid",async(req,res)=>{
+    await managerAcces.crearRegistro('DELETE');
     try {
         const cartId = req.params.cid;
         const cart = await cartManager.getCartById(cartId);
