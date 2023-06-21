@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import __dirname from '../utils.js';
-import ManagerAcces from '../dao/managers/ManagerAccess.js';
+import ManagerAcces from '../../../Entrega-Migracion/src/daos/managers/ManagerAccess.js';
 import cartModel from '../dao/models/cartModel.js';
 import CartManagerMongo from '../dao/mongo/cartmanagerMongo.js';
 
