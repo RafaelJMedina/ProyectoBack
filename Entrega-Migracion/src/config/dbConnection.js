@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import {options} from "./options.js";
+import  {options} from "./option.js"; 
 
 try {
   await mongoose.connect(options.mongoDB.url);

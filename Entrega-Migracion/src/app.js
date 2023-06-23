@@ -14,7 +14,7 @@ import { ChatModel} from "./daos/models/chat.model.js";
 import { authRouter } from "./routes/auth.routes.js";
 import passport from "passport";
 import { initializePassport } from "./config/passport.config.js";
-import {options} from "./config/options.js";
+import {options} from "./config/option.js"; 
 
 //SERVICE
 const chatManager = new chatManagerMongo(ChatModel);
