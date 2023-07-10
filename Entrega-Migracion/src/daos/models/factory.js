@@ -1,4 +1,4 @@
-import { options } from "../config/option.js";
+import { options } from "../../config/option.js";
 // import { connectDB } from "../config/dbConnection.js";
 
 const persistence = options.server.persistence;
