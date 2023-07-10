@@ -15,6 +15,7 @@ import { authRouter } from "./routes/auth.routes.js";
 import passport from "passport";
 import { initializePassport } from "./config/passport.config.js";
 import {options} from "./config/option.js"; 
+import { contactsRouter } from "./routes/contacts.routes.js";
 
 //SERVICE
 const chatManager = new chatManagerMongo(ChatModel);
@@ -59,6 +60,7 @@ app.use(webRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/sessions", authRouter);
+app.use("/api/contacts", contactsRouter);
 
 //CONFIGURACION DE SOCKET 
 socketServer.on("connection",async(socketConnected)=>{
