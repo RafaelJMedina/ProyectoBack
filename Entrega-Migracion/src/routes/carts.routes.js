@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { CartModel} from "../daos/models/cart.model.js";
 import { ProductModel } from "../daos/models/product.model.js";
-import { v4 as uuidv4} from "uuidv4";
+import { v4 as uuidv4} from "uuid";
 
 
 const router = Router();
@@ -62,7 +62,7 @@ router.post("/:cid/purchase",async(req,res)=>{
                 }
             }
             const newTicket = {
-                code:uuidv4(),
+                code: uuidv4(),
                 purchase_datetime: new Date().toLocaleDateString(),
                 amount: total,
                 purchaser: req.user.email,
