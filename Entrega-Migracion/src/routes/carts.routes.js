@@ -10,6 +10,17 @@ const productManager = new ProductModel;
 
 const router = Router();
 
+
+//CREAR CARRITO
+router.post('/',async(req,res)=>{
+    await managerAcces.crearRegistro('Carrito creados');
+    try {
+        const cartCreated = await cartManager.create({});
+        res.send(cartCreated)
+    } catch (error) {
+        res.send(error.message)
+    }
+})
 //agregar carrito
 router.post("/",async(req,res)=>{
     await managerAcces.crearRegistro('Alta carrito');
