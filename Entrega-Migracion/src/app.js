@@ -78,3 +78,8 @@ socketServer.on("connection",async(socketConnected)=>{
         socketServer.emit("msgHistory", messages);
     });
 });
+
+//endpoint
+app.get("/loggerTest", (req, res) =>{
+    res.send("Logger Test")
+})
