@@ -16,6 +16,7 @@ import passport from "passport";
 import { initializePassport } from "./config/passport.config.js";
 import {options} from "./config/option.js"; 
 import { contactsRouter } from "./routes/contacts.routes.js";
+import { addLogger } from "./middlewares/logger.js";
 
 //SERVICE
 const chatManager = new chatManagerMongo(ChatModel);
@@ -32,7 +33,7 @@ const socketServer = new Server(httpServer);
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use(express.static(path.join(__dirname,"/public")));
-
+app.use(addLogger)
 httpServer.on('error', error => console.log(`Error in server ${error}`));
 
 //CONFIGURACION DE SESSION
