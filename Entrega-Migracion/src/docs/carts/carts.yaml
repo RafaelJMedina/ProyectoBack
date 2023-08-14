@@ -1,0 +1,58 @@
+paths:
+  /api/carts/:
+    get:
+      summary: Obtener el carrito
+      tags:
+        - Carrito
+      responses:
+      "200":
+        description: Se cargaron los productos del carrito
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: "#components/schemas/Carts"
+      "401":
+        description: Error por falta de permisos
+      "500"
+        description: Error interno de el servidor
+    post:
+      summary: Crear Carrito
+      tags:
+        - Carrito
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#components/requestBodies/UpdateCart"
+      responses:
+        "200":
+          description: Producto cargado al carrito correctamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  payload:
+                    $ref: "#components/schemas/Cart"
+      "401":
+        description: Error por falta de permisos
+      "500"
+        description: Error interno de el servidor
+
+components:
+  schema:
+    requestBodies:
+      UpdateProduct:
+        type: object
+        properties:
+          _id:
+            type: ObjectI
+            description: id del producto autogenerado por la base de dato
+          quantity:
+            type: Number
+            description: Cantidad del mismo producto en el carrito.

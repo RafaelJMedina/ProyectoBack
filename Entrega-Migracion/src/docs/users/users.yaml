@@ -1,0 +1,41 @@
+paths:
+  /api/users/:
+    get:
+    post:
+      summary: Obtener todos los usuarios
+      tags:
+        - Usuarios
+      responses:
+      "200":
+        description: Todos los usuarios obtenidos 
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#components/schemas/User'
+      "401":
+        description: Error por falta de permisos
+      "500"
+        description: Error interno de el servidor
+
+components:
+  schema:
+    User:
+      type: object
+      properties:
+        _id:
+          type: ObjectId
+          description: id del usuario autogenerado por la base de dato
+        name:
+          type: string
+          description: Nombre del usuario
+        email:
+          type: string
+          description: Correo del usuario, este campo es unico
+        password: 
+          type: string
+          description: Contraseña Hasheada del usuario.
+        rol:
+          type: string
+          description: Rol de usuario.

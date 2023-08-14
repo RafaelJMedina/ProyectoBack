@@ -62,7 +62,7 @@ app.set("view engine", ".hbs");
 app.use(webRouter);
 app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
-app.use("/api/sessions", authRouter);
+app.use("/api/session", authRouter);
 app.use("/api/contacts", contactsRouter);
 //Ruta de Swagger
 app.use('/api/docs', swaggerUi.serve,swaggerUi.setup(swaggerSpecs));
