@@ -2,7 +2,7 @@ import express from "express";
 import handlebars from "express-handlebars";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-import{__dirname} from "./utils.js";
+import{__dirname} from "../src/utils.js";
 import path from "path";
 import { productsRouter } from "./routes/products.routes.js";
 import { cartsRouter } from "./routes/carts.routes.js";
@@ -17,6 +17,8 @@ import { initializePassport } from "./config/passport.config.js";
 import {options} from "./config/option.js"; 
 import { contactsRouter } from "./routes/contacts.routes.js";
 import { addLogger } from "./middlewares/logger.js";
+import { swaggerSpecs } from "./config/docConfig.js";
+import swaggerUi from 'swagger-ui-express';
 
 //SERVICE
 const chatManager = new chatManagerMongo(ChatModel);
@@ -62,6 +64,8 @@ app.use("/api/products", productsRouter);
 app.use("/api/carts", cartsRouter);
 app.use("/api/sessions", authRouter);
 app.use("/api/contacts", contactsRouter);
+//Ruta de Swagger
+app.use('/api/docs', swaggerUi.serve,swaggerUi.setup(swaggerSpecs));
 
 //CONFIGURACION DE SOCKET 
 socketServer.on("connection",async(socketConnected)=>{

@@ -11,3 +11,5 @@ export const createHash = (password)=>{
 export const isValidPassword = (password, user)=>{
     return bcrypt.compareSync(password, user.password)
 }
+
+export default __dirname;
