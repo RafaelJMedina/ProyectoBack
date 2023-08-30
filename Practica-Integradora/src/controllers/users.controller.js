@@ -22,7 +22,7 @@ class UserController{
             res.json({status:"error", message:"hubo un error al cambiar el rol del usuario"})
         }
     }
-    static updateUserDocument = async (req,res) =>{
+    static updateUser = async (req,res) =>{
         try {
             const userId = req.params.uid
             const user = await UserModel.findById(userId);
