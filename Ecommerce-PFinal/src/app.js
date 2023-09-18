@@ -1,7 +1,7 @@
 import express from "express";
 import { connectDB } from "./config/dbConnection.js";
 import {options} from "./config/options.js";
-import exphbs from 'express-handlebars';
+import { engine } from 'express-handlebars';
 import { __dirname } from "./utils.js";
 import path from "path";
 
@@ -19,22 +19,21 @@ import { usersRouter } from "./routes/users.routes.js";
 const port = 8080;
 const app = express();
 
+//Handlebars config
+app.engine('.hbs', engine({
+    defaultLayout: 'main',
+    extname: '.hbs',
+    layoutsDir: path.join(__dirname, 'views', 'layouts'),
+    partialsDir: path.join(__dirname, 'views', 'partials'),
+}));
+app.set('view engine', '.hbs');
+app.set('views', path.join(__dirname,"/views"));
+
 //middleware
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
-
+app.use(express.static(__dirname + "/public"));
 app.listen(port,()=>console.log(`Server ok`));
-
-//configuracion de handlebars
-app.set('views', path.join(__dirname, "views"));
-app.engine('.hbs', exphbs({
-    defaultlayout: 'main',
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    partialsDir: path.join(app.get('partials'), 'partials'),
-    extname: '.hbs'
-}))
-app.set('view engine', '.hbs');
-
 
 //conectamos la base de datos
 connectDB();
