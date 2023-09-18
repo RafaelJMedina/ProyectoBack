@@ -27,4 +27,9 @@ router.get("/perfil", (req,res)=>{
     res.send(`Bienvenido ${req.user.email} <a href="/">home</a>`);
 });
 
+router.get("/products", (req,res)=>{
+    res.render("products");
+
+});
+
 export {router as viewsRouter};
