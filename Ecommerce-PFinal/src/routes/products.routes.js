@@ -4,7 +4,7 @@ import { ProductModel} from "../daos/models/product.model.js";
 
 const router = Router();
 
-router.get("/",(req,res)=>{
+router.get("/products",(req,res)=>{
     res.send("todos los productos");
 });
 
